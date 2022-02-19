@@ -1,0 +1,29 @@
+<h2>Listado de Héroes!</h2>
+
+<ul>
+    <li *ngFor="let heroe of heroes, let i = index">
+        {{ i + 1 }} - {{ heroe }}
+    </li>
+</ul>
+
+<!-- ng-template #etiqueta se muestra si no se cumple la condición 
+en el *ngif siguiente (puede estar en cualquier posición) -->
+<ng-template #noQuedan>
+    <h3>No quedan héroes !!!</h3>
+</ng-template>
+
+<button (click)="borrarHeroes( +1 )" *ngIf="heroes > []; else noQuedan;"> Borrar Primero </button>
+<button (click)="borrarHeroes( -1 )" *ngIf="heroes > []"> Borrar Último </button>
+<button (click)="borrarHeroes(  0 )" *ngIf="heroes > []"> Borrar Todos </button>
+<button (click)="undoHeroes()" *ngIf="borrados > []"> Restaurar </button>
+
+<div *ngIf="borrados > []">
+    <h2>Héroes Borrados</h2>
+    
+    <ul>
+        <li *ngFor="let heroe of borrados, let i = index">
+            {{ i + 1 }} - {{ heroe }}
+        </li>
+    </ul>
+</div>
+
